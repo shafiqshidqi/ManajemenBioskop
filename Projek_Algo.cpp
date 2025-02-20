@@ -78,6 +78,13 @@ struct jadwal_film {
     vector<string> seat;
 };
 
+jadwal_film schedule[10] {
+    {"Avengers: Endgame",
+     "17 April 2024",
+     "1",
+     }
+}
+
 void tampilkanmenu(string name) {
     cout << endl;
     cout << "||  Selamat datang, " << name << endl << endl;
@@ -125,12 +132,22 @@ void tampilanmenu_tiket(string name){
     cout << "Pilih Menu : "; cin >> choice;
     switch (choice) {
         case 1 :
+            tambahtiket(name);
 
     }
 }
 
 void tambahtiket(string name){
-    
+     cout << "||  Selamat datang, " << name << endl;
+    cout << ">>>>>>>>>>>>>>>>>>>>>  BABARSARI PLAZA - CINEMA XX  <<<<<<<<<<<<<<<<<<<<<<" << endl;
+    cout << ">=======================      DAFTAR FILM      ==========================<\n";
+    for(int i = 0; i < 5; i++){
+        cout << endl;
+        cout << i+1 << ". " << Movie[i].judul_Film << endl << endl;
+        cout << "   Genre    : " << Movie[i].genre << endl;
+        cout << ">========================================================================<\n";
+    }
+    cout << "Berapa Tiket yang dipesan : "
 }
 
 int main()
