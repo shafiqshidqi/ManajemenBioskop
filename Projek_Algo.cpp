@@ -78,12 +78,12 @@ struct jadwal_film {
     vector<string> seat;
 };
 
-jadwal_film schedule[10] {
+jadwal_film schedule[5][10] {
     {"Avengers: Endgame",
      "17 April 2024",
-     "1",
+     "1","14:30"
      }
-}
+};
 
 void tampilkanmenu(string name) {
     cout << endl;
@@ -95,7 +95,8 @@ void tampilkanmenu(string name) {
     cout << " |     1. Data Tiket Pengunjung                                         | " << endl;
     cout << " |     2. Data Film On-going                                            | " << endl;
     cout << " |     3. Data Makanan dan Minuman                                      | " << endl;
-    cout << " |     4. Exit                                                          | " << endl;
+    cout << " |     4. Cari Film                                                     | " << endl;
+    cout << " |     5. Exit                                                          | " << endl;
     cout << " |                                                                      | " << endl;
     cout << ">>>>>>>>>>>>>>>>>>>>>>>  Contact : 0812-3456-7890  <<<<<<<<<<<<<<<<<<<<<<<" << endl << endl;
 }
@@ -113,6 +114,21 @@ void tampilanmenu_film(string name){
         cout << "   Sinopsi  : " << Movie[i].sinopsis << endl << endl;
         cout << ">========================================================================<\n";
     }
+}
+
+
+void tambahtiket(string name){
+     cout << "||  Selamat datang, " << name << endl;
+    cout << ">>>>>>>>>>>>>>>>>>>>>  BABARSARI PLAZA - CINEMA XX  <<<<<<<<<<<<<<<<<<<<<<" << endl;
+    cout << ">=======================      DAFTAR FILM      ==========================<\n";
+    for(int i = 0; i < 5; i++){
+        cout << endl;
+        cout << i+1 << ". " << Movie[i].judul_Film << endl;
+        cout << "   Genre    : " << Movie[i].genre << endl;
+        cout << ">========================================================================<\n";
+    }
+    int movie;
+    cout << "Choose the Movie : "; cin >> movie;
 }
 
 void tampilanmenu_tiket(string name){
@@ -133,21 +149,37 @@ void tampilanmenu_tiket(string name){
     switch (choice) {
         case 1 :
             tambahtiket(name);
+        case 4 :
+            return;
 
     }
 }
 
-void tambahtiket(string name){
-     cout << "||  Selamat datang, " << name << endl;
-    cout << ">>>>>>>>>>>>>>>>>>>>>  BABARSARI PLAZA - CINEMA XX  <<<<<<<<<<<<<<<<<<<<<<" << endl;
-    cout << ">=======================      DAFTAR FILM      ==========================<\n";
+void carifilm(string name){
+    string cari;
+    bool ditemukan = false;
+
+    cout << "\nMasukkan judul film yang ingin dicari : ";
+    cin.ignore();
+    getline(cin, cari);
+
+    cout << "\nHasil Pencarian : \n";
+
     for(int i = 0; i < 5; i++){
-        cout << endl;
-        cout << i+1 << ". " << Movie[i].judul_Film << endl << endl;
-        cout << "   Genre    : " << Movie[i].genre << endl;
-        cout << ">========================================================================<\n";
+        if(Movie[i].judul_Film == cari){
+            cout << "   Judul    : " << Movie[i].judul_Film << endl;
+            cout << "   Genre    : " << Movie[i].genre << endl;
+            cout << "   Durasi   : " << Movie[i].durasi << " Menit" << endl;
+            cout << "   Produser : " << Movie[i].produser << endl;
+            cout << "   Sinopsis : " << Movie[i].sinopsis << endl;
+            ditemukan = true;
+            break;
+        }
     }
-    cout << "Berapa Tiket yang dipesan : "
+
+    if(!ditemukan){
+        cout << "\nFilm tidak ditemukan !" << endl;
+    }
 }
 
 int main()
@@ -156,7 +188,7 @@ int main()
     int choice;
     cout << "Masukkan nama : ";
     getline(cin, nama);
-
+    system("cls");
     tampilkanmenu(nama);
     cout << "Pilih Menu : "; cin >> choice;
 
@@ -166,6 +198,9 @@ int main()
 
         case 2 :    
             tampilanmenu_film(nama);
+            break;
+        case 4 :
+            carifilm(nama);
             break;
         default: cout << "Pilihan tidak valid!" << endl;
     }
